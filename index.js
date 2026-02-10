@@ -18,6 +18,48 @@ app.get('/personagens', (req, res) => {
   res.send(lista)
 })
 
+app.get('/personagens/:id', (req, res) => {
+  const id = req.params.id
+  res.send(id)
+})
+
+
+app.use(express.json())
+
+app.post('/personagens', (req,res)=> {
+  const novoPersonagem = req.body.nome
+
+  lista.push(novoPersonagem)
+
+  res.send("novo personagem adds")
+})
+
+
+app.put('/personagens/:id', (req,res) => {
+  const id = req.params.id
+  const nomeAtualizado = req.body.nome
+
+  lista[id - 1 ] = nomeAtualizado
+
+  res.send("Atualizado!")
+})
+
+
+
+app.delete('/personagens/:id', (req,res) => {
+  const id = req.params.id
+
+  lista.splice(id - 1, 1)
+  res.send("removido!")
+})
+
+
+
+
+
+
+
+
 app.listen(port, () => {
   console.log(`Servidor rodando na porta: ${port}`)
 })
